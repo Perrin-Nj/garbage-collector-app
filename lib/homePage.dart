@@ -1,4 +1,5 @@
 // ignore: file_names
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:garbage_collector_app/my_account.dart';
 import 'package:garbage_collector_app/pickUp_assistance.dart';
@@ -9,12 +10,20 @@ import 'package:garbage_collector_app/pickUp_services/pickUp_subscription.dart';
 import 'package:garbage_collector_app/utils/Themes.dart';
 
 class Home extends StatelessWidget {
-  const Home({Key? key}) : super(key: key);
+  Home({Key? key}) : super(key: key);
 
+  final navigatorKey = GlobalKey<NavigatorState>();
   @override
   Widget build(BuildContext context) {
+    final user = FirebaseAuth.instance.currentUser!;
+    var userEmail = user.email;
+    if (userEmail!.contains('@gmail.com')) {
+      userEmail = userEmail.replaceAll('@gmail.com', ' ');
+    }
+
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         toolbarHeight: 150, //height of appBar
         backgroundColor: PRIMARY_COLOR,
         flexibleSpace: Stack(
@@ -25,13 +34,13 @@ class Home extends StatelessWidget {
                   height: 30,
                 ),
                 Row(
-                  children: const [
+                  children: [
                     SizedBox(
-                      width: 340,
+                      width: MediaQuery.of(context).size.width - 50,
                     ),
-                    Icon(
+                    const Icon(
                       Icons.share,
-                      size: 40,
+                      size: 35,
                       color: Colors.white,
                     ),
                   ],
@@ -39,7 +48,7 @@ class Home extends StatelessWidget {
                 const SizedBox(
                   height: 10,
                 ),
-                Text('Salut John!!',
+                Text('Salut $userEmail',
                     style: Theme.of(context).textTheme.bodyText1),
                 const Text(
                   'Que pouvons nous faire pour vous?',
@@ -92,179 +101,187 @@ class Home extends StatelessWidget {
       ),
       body: Stack(
         children: [
-          Column(
-            //wrap in a safeArea
-            //designing cards to add services
-            // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            //crossAxisAlignment: CrossaxisAl,
-
+          ListView(
             children: [
-              const SizedBox(
-                height: 80, //distance btw appBar and body
-              ),
-              Row(
-                children: [
-                  InkWell(
-                    // ignore: avoid_print
-                    borderRadius: BorderRadius.circular(16),
-                    splashColor: Theme.of(context).colorScheme.secondary,
-                    onTap: () => Navigator.of(context).push(
-                      MaterialPageRoute(
-                        fullscreenDialog: true,
-                        builder: (_) {
-                          return const PickUpSchedule();
-                        },
-                      ),
-                    ),
-                    child: cardServices(
-                      const Icon(
-                        Icons.calendar_month_sharp, //work_history
-                        size: 90,
-                        color: Colors.cyan,
-                      ),
-                      'Programmer \n \t\t\t\t\t\t Un Ramassage',
-                    ),
-                  ),
-                  InkWell(
-                    borderRadius: BorderRadius.circular(16),
-                    splashColor: Theme.of(context).colorScheme.secondary,
-                    onTap: () => Navigator.of(context).push(
-                      MaterialPageRoute(
-                        fullscreenDialog: true,
-                        builder: (_) {
-                          return const PickUpSubscription();
-                        },
-                      ),
-                    ),
-                    child: cardServices(
-                      const Icon(
-                        Icons.free_cancellation_outlined,
-                        size: 90,
-                        color: Color.fromARGB(255, 16, 156, 216),
-                      ),
-                      "Souscrire à\n \t\t\t\t\t\t Un Ramassage",
-                    ),
-                  ),
-                ],
-              ),
-              const SizedBox(
-                height: 25,
-              ),
-              //const Expanded(child: SizedBox.shrink()),
-              Row(
-                children: [
-                  InkWell(
-                    borderRadius: BorderRadius.circular(16),
-                    splashColor: Theme.of(context).colorScheme.secondary,
-                    onTap: () => Navigator.of(context).push(
-                      MaterialPageRoute(
-                        fullscreenDialog: true,
-                        builder: (_) {
-                          return const PickUpHistory();
-                        },
-                      ),
-                    ),
-                    child: cardServices(
-                      const Icon(
-                        Icons.history_outlined,
-                        size: 90,
-                        color: Color.fromARGB(255, 114, 153, 158),
-                      ),
-                      "Historique \n\t\r\r\r\t\t\tDe ramassage",
-                    ),
-                  ),
-                  InkWell(
-                    borderRadius: BorderRadius.circular(16),
-                    splashColor: Theme.of(context).colorScheme.secondary,
-                    onTap: () => Navigator.of(context).push(
-                      MaterialPageRoute(
-                        fullscreenDialog: true,
-                        builder: (_) {
-                          return const OurAgencies();
-                        },
-                      ),
-                    ),
-                    child: cardServices(
-                      const Icon(
-                        Icons.location_on_outlined,
-                        size: 90,
-                        color: Color.fromARGB(255, 31, 200, 230),
-                      ),
-                      "Nos agences \t\t\t A proximité",
-                    ),
-                  ),
-                ],
-              ),
-              const SizedBox(
-                height: 35,
-              ),
-              //bottom nav bar
-              const Divider(
-                thickness: 2,
-              ),
-              Row(
+              Column(
+                //wrap in a safeArea
+                //designing cards to add services
+                // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                //crossAxisAlignment: CrossaxisAl,
+
                 children: [
                   const SizedBox(
-                    width: 25,
+                    height: 80, //distance btw appBar and body
                   ),
-                  InkWell(
-                    borderRadius: BorderRadius.circular(5),
-                    splashColor: Theme.of(context).colorScheme.secondary,
-                    onTap: () => Navigator.of(context).push(
-                      MaterialPageRoute(
-                        fullscreenDialog: true,
-                        builder: (_) {
-                          return const PickUpAssistance();
-                        },
-                      ),
-                    ),
-                    child: Column(
-                      children: const [
-                        Icon(
-                          Icons.contact_support_outlined,
-                          color: PRIMARY_COLOR,
-                          size: 35,
-                        ),
-                        Text(
-                          'Assistance',
-                          style: TextStyle(
-                            fontSize: 12,
-                            fontWeight: FontWeight.w600,
+                  Row(
+                    children: [
+                      InkWell(
+                        // ignore: avoid_print
+                        borderRadius: BorderRadius.circular(16),
+                        splashColor: Theme.of(context).colorScheme.secondary,
+                        onTap: () => Navigator.of(context).push(
+                          MaterialPageRoute(
+                            fullscreenDialog: true,
+                            builder: (_) {
+                              return const PickUpSchedule();
+                            },
                           ),
                         ),
-                      ],
-                    ),
+                        child: cardServices(
+                          const Icon(
+                            Icons.calendar_month_sharp, //work_history
+                            size: 25,
+                            color: Colors.cyan,
+                          ),
+                          'Programmer \n \t\t\t\t\t\t Un Ramassage',
+                          context,
+                        ),
+                      ),
+                      InkWell(
+                        borderRadius: BorderRadius.circular(16),
+                        splashColor: Theme.of(context).colorScheme.secondary,
+                        onTap: () => Navigator.of(context).push(
+                          MaterialPageRoute(
+                            fullscreenDialog: true,
+                            builder: (_) {
+                              return const PickUpSubscription();
+                            },
+                          ),
+                        ),
+                        child: cardServices(
+                          const Icon(
+                            Icons.free_cancellation_outlined,
+                            size: 25,
+                            color: Color.fromARGB(255, 16, 156, 216),
+                          ),
+                          "Souscrire à\n \t\t\t\t\t\t Un Ramassage",
+                          context,
+                        ),
+                      ),
+                    ],
                   ),
                   const SizedBox(
-                    width: 220,
+                    height: 25,
                   ),
-                  InkWell(
-                    borderRadius: BorderRadius.circular(5),
-                    splashColor: Theme.of(context).colorScheme.secondary,
-                    onTap: () => Navigator.of(context).push(
-                      MaterialPageRoute(
-                        fullscreenDialog: true,
-                        builder: (_) {
-                          return const Myaccount();
-                        },
-                      ),
-                    ),
-                    child: Column(
-                      children: const [
-                        Icon(
-                          Icons.person,
-                          color: PRIMARY_COLOR,
-                          size: 35,
-                        ),
-                        Text(
-                          'Mon compte',
-                          style: TextStyle(
-                            fontSize: 12,
-                            fontWeight: FontWeight.w600,
+                  //const Expanded(child: SizedBox.shrink()),
+                  Row(
+                    children: [
+                      InkWell(
+                        borderRadius: BorderRadius.circular(16),
+                        splashColor: Theme.of(context).colorScheme.secondary,
+                        onTap: () => Navigator.of(context).push(
+                          MaterialPageRoute(
+                            fullscreenDialog: true,
+                            builder: (_) {
+                              return const PickUpHistory();
+                            },
                           ),
                         ),
-                      ],
-                    ),
+                        child: cardServices(
+                          const Icon(
+                            Icons.history_outlined,
+                            size: 25,
+                            color: Color.fromARGB(255, 114, 153, 158),
+                          ),
+                          "Historique \n\t\r\r\r\t\t\tDe ramassage",
+                          context,
+                        ),
+                      ),
+                      InkWell(
+                        borderRadius: BorderRadius.circular(16),
+                        splashColor: Theme.of(context).colorScheme.secondary,
+                        onTap: () => Navigator.of(context).push(
+                          MaterialPageRoute(
+                            fullscreenDialog: true,
+                            builder: (_) {
+                              return const OurAgencies();
+                            },
+                          ),
+                        ),
+                        child: cardServices(
+                          const Icon(
+                            Icons.location_on_outlined,
+                            size: 40,
+                            color: Color.fromARGB(255, 31, 200, 230),
+                          ),
+                          "\n\t\t\tNos agences \n\t\t\t\tA proximité",
+                          context,
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 35,
+                  ),
+                  //bottom nav bar
+                  const Divider(
+                    thickness: 2,
+                  ),
+                  Row(
+                    children: [
+                      const SizedBox(
+                        width: 25,
+                      ),
+                      InkWell(
+                        borderRadius: BorderRadius.circular(5),
+                        splashColor: Theme.of(context).colorScheme.secondary,
+                        onTap: () => Navigator.of(context).push(
+                          MaterialPageRoute(
+                            fullscreenDialog: true,
+                            builder: (_) {
+                              return const PickUpAssistance();
+                            },
+                          ),
+                        ),
+                        child: Column(
+                          children: const [
+                            Icon(
+                              Icons.contact_support_outlined,
+                              color: PRIMARY_COLOR,
+                              size: 35,
+                            ),
+                            Text(
+                              'Assistance',
+                              style: TextStyle(
+                                fontSize: 12,
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      const SizedBox(
+                        width: 148,
+                      ),
+                      InkWell(
+                        borderRadius: BorderRadius.circular(5),
+                        splashColor: Theme.of(context).colorScheme.secondary,
+                        onTap: () => Navigator.of(context).push(
+                          MaterialPageRoute(
+                            fullscreenDialog: true,
+                            builder: (_) {
+                              return const Myaccount();
+                            },
+                          ),
+                        ),
+                        child: Column(
+                          children: const [
+                            Icon(
+                              Icons.person,
+                              color: PRIMARY_COLOR,
+                              size: 35,
+                            ),
+                            Text(
+                              'Mon compte',
+                              style: TextStyle(
+                                fontSize: 12,
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
                   ),
                 ],
               ),
@@ -298,13 +315,13 @@ class Home extends StatelessWidget {
     );
   }
 
-  Container cardServices(Icon img, var txt) {
+  Container cardServices(Icon img, var txt, BuildContext ctx) {
     return Container(
       margin: const EdgeInsets.symmetric(
         horizontal: 23,
       ),
-      height: 190,
-      width: 150,
+      height: 100,
+      width: MediaQuery.of(ctx).size.height - 480,
       decoration: BoxDecoration(
         //boxShadow: BoxShadow.,
         boxShadow: const [
@@ -327,13 +344,13 @@ class Home extends StatelessWidget {
         child: Column(
           children: [
             img,
-            const SizedBox(height: 20),
+            const SizedBox(height: 6),
             SizedBox(
               width: 100,
               child: Text(
                 txt,
                 style: const TextStyle(
-                  fontSize: 17,
+                  fontSize: 14,
                   fontWeight: FontWeight.w500,
                 ),
               ),

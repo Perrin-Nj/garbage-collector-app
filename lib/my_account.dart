@@ -1,4 +1,5 @@
 // ignore: file_names
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class Myaccount extends StatelessWidget {
@@ -13,8 +14,19 @@ class Myaccount extends StatelessWidget {
           style: TextStyle(fontSize: 18),
         ),
       ),
-      body: Column(
-        children: const [Text('ICI LA PAGE POUR LE COMPTE')],
+      body: ElevatedButton.icon(
+        //button to log out
+        style: ElevatedButton.styleFrom(
+          minimumSize: const Size.fromHeight(50),
+        ),
+        icon: const Icon(Icons.arrow_back),
+        onPressed: () => FirebaseAuth.instance.signOut(),
+        label: const Text(
+          'Se déconnecter',
+          style: TextStyle(
+            fontSize: 24,
+          ),
+        ),
       ),
     );
   }

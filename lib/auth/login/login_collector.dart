@@ -1,19 +1,17 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:garbage_collector_app/auth/login/choose_user_type.dart';
 import 'package:garbage_collector_app/homePage.dart';
 import 'package:garbage_collector_app/utils/Themes.dart';
-import 'package:intl_phone_field/intl_phone_field.dart';
 
-class LoginScreen extends StatefulWidget {
-  const LoginScreen({Key? key}) : super(key: key);
+class LoginCollector extends StatefulWidget {
+  const LoginCollector({Key? key}) : super(key: key);
 
   @override
-  State<LoginScreen> createState() => _LoginScreenState();
+  State<LoginCollector> createState() => _LoginCollectorState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class _LoginCollectorState extends State<LoginCollector> {
   //Initializing firebase app
 
   Future<FirebaseApp> _initializeFirebase() async {
@@ -46,18 +44,34 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: FutureBuilder(
-          future: _initializeFirebase(),
-          builder: (context, snapshot) {
-            if (snapshot.connectionState == ConnectionState.done) {
-              return const LoginScreenDesign();
-            }
-            return const Center(
-              child: CircularProgressIndicator(
-                color: PRIMARY_COLOR,
-              ),
-            );
-          }),
+      body: Container(
+        width: double.infinity,
+        height: double.infinity,
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topRight,
+            end: Alignment.bottomRight,
+            colors: [
+              Color.fromARGB(255, 255, 255, 255),
+              Color.fromARGB(255, 169, 237, 225),
+            ],
+          ),
+        ),
+        child: FutureBuilder(
+            future: _initializeFirebase(),
+            builder: (context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.done ||
+                  snapshot.hasData) {
+                return const LoginScreenDesign();
+              } else {
+                return const Center(
+                  child: CircularProgressIndicator(
+                    color: PRIMARY_COLOR,
+                  ),
+                );
+              }
+            }),
+      ),
     );
   }
 }
@@ -72,23 +86,23 @@ class LoginScreenDesign extends StatefulWidget {
 class _LoginScreenDesignState extends State<LoginScreenDesign> {
   final phoneController = TextEditingController();
   final passwordController = TextEditingController();
-  late FocusNode FocusNodePhone;
-  late FocusNode FocusNodePassword;
+  late FocusNode focusNodePhone;
+  late FocusNode focusNodePassword;
 
   bool passenable = true; //boolean value to track password view enable disable.
   @override
   void initState() {
     super.initState();
 
-    FocusNodePhone = FocusNode();
-    FocusNodePassword = FocusNode();
+    focusNodePhone = FocusNode();
+    focusNodePassword = FocusNode();
   }
 
   @override
   void dispose() {
     // Clean up the focus node when the Form is disposed.
-    FocusNodePhone.dispose();
-    FocusNodePassword.dispose();
+    focusNodePhone.dispose();
+    focusNodePassword.dispose();
 
     super.dispose();
   }
@@ -96,26 +110,26 @@ class _LoginScreenDesignState extends State<LoginScreenDesign> {
   void _onConnect() {
     if (phoneController.text == '670754483' &&
         passwordController.text == 'Motdepasse') {
-      Navigator.of(context).pushReplacement(
+      Navigator.pushAndRemoveUntil(
+        context,
         MaterialPageRoute(
-          builder: (_) {
-            return const Home();
-          },
+          builder: (context) => Home(),
         ),
+        (route) => false,
       );
     } else {
       showDialog(
         context: context,
         builder: (context) => const AlertDialog(
           title: Text(
-            'Informations incorrects!',
+            'Informations incorrectes!',
             style: TextStyle(
               color: Colors.red,
               fontSize: 13,
             ),
           ),
           content: Text(
-            "S'il vous, entrez des informations correctes !!!",
+            "S'il vous plait, entrez des informations correctes !!!",
             style: TextStyle(
               color: Colors.red,
               fontSize: 13,
@@ -155,10 +169,10 @@ class _LoginScreenDesignState extends State<LoginScreenDesign> {
           const SizedBox(height: 44),
           //phone number
 
-          IntlPhoneField(
+          /* IntlPhoneField(
             controller: phoneController,
             onSubmitted: (_) {
-              FocusScope.of(context).requestFocus(FocusNodePassword);
+              FocusScope.of(context).requestFocus(focusNodePassword);
             },
             textInputAction: TextInputAction.next,
             autovalidateMode: AutovalidateMode.disabled,
@@ -166,7 +180,7 @@ class _LoginScreenDesignState extends State<LoginScreenDesign> {
             style: const TextStyle(
               color: Colors.black,
             ),
-            focusNode: FocusNodePhone,
+            focusNode: focusNodePhone,
             decoration: const InputDecoration(
               // hintText: 'Numéro de Téléphone',
               labelText: 'Numéro de Téléphone',
@@ -179,7 +193,7 @@ class _LoginScreenDesignState extends State<LoginScreenDesign> {
             onChanged: (phone) {
               print(phone.completeNumber);
             },
-          ),
+          ), */
           TextField(
             controller: passwordController,
             textInputAction: TextInputAction.done,
@@ -187,7 +201,7 @@ class _LoginScreenDesignState extends State<LoginScreenDesign> {
               _onConnect();
             },
             autofocus: false,
-            focusNode: FocusNodePassword,
+            focusNode: focusNodePassword,
             textAlign: TextAlign.center,
             obscureText:
                 passenable, //if passenable == true, show **, else show password character

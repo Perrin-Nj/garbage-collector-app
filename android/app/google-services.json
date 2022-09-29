@@ -1,33 +1,33 @@
 {
   "project_info": {
-    "project_number": "68148621395",
-    "project_id": "garbage-collector-d114a",
-    "storage_bucket": "garbage-collector-d114a.appspot.com"
+    "project_number": "620853047278",
+    "project_id": "garbage-collector-app-19376",
+    "storage_bucket": "garbage-collector-app-19376.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:68148621395:android:f76ffdb1441a0fb38c56a6",
+        "mobilesdk_app_id": "1:620853047278:android:a8b2393a49bbccc10528ff",
         "android_client_info": {
           "package_name": "com.example.garbage_collector_app"
         }
       },
       "oauth_client": [
         {
-          "client_id": "68148621395-22l1fg20hptbijqi0fa7dfo4ugbggru3.apps.googleusercontent.com",
+          "client_id": "620853047278-hp3mtii8f92n3k72e754p66f1l3ohstq.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyD_OqSgUNNzVeLUAitF4ZtRzH80MmOO4UU"
+          "current_key": "AIzaSyB9-Po0sVkf0Exp5q-98MCDN1aP6LSSzFA"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "68148621395-22l1fg20hptbijqi0fa7dfo4ugbggru3.apps.googleusercontent.com",
+              "client_id": "620853047278-hp3mtii8f92n3k72e754p66f1l3ohstq.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

@@ -11,7 +11,7 @@ ThemeData darkTheme() {
       primaryColor: Colors.black38,
       splashColor: const Color.fromRGBO(51, 182, 161, 1),
       indicatorColor: const Color(0xFF807A6B),
-      accentColor: const Color(0xFFFFF8E1),
+      accentColor: const Color.fromARGB(255, 24, 83, 179),
       primaryIconTheme: darkTheme.primaryIconTheme.copyWith(
         color: Colors.green,
         size: 20,

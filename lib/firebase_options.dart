@@ -44,40 +44,40 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyBceSYwRgIvYSvNEhz8bx-Ews9r2EsQNBU',
-    appId: '1:68148621395:web:33e5b6f19cf1d51e8c56a6',
-    messagingSenderId: '68148621395',
-    projectId: 'garbage-collector-d114a',
-    authDomain: 'garbage-collector-d114a.firebaseapp.com',
-    storageBucket: 'garbage-collector-d114a.appspot.com',
-    measurementId: 'G-RFSYW7TTEH',
+    apiKey: 'AIzaSyAFDjp0Xjp2xNcjYAeuc3xrA4gNE6DdEyg',
+    appId: '1:620853047278:web:8f93ccce14a2f72d0528ff',
+    messagingSenderId: '620853047278',
+    projectId: 'garbage-collector-app-19376',
+    authDomain: 'garbage-collector-app-19376.firebaseapp.com',
+    storageBucket: 'garbage-collector-app-19376.appspot.com',
+    measurementId: 'G-WEN6SM9MVN',
   );
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyD_OqSgUNNzVeLUAitF4ZtRzH80MmOO4UU',
-    appId: '1:68148621395:android:f76ffdb1441a0fb38c56a6',
-    messagingSenderId: '68148621395',
-    projectId: 'garbage-collector-d114a',
-    storageBucket: 'garbage-collector-d114a.appspot.com',
+    apiKey: 'AIzaSyB9-Po0sVkf0Exp5q-98MCDN1aP6LSSzFA',
+    appId: '1:620853047278:android:a8b2393a49bbccc10528ff',
+    messagingSenderId: '620853047278',
+    projectId: 'garbage-collector-app-19376',
+    storageBucket: 'garbage-collector-app-19376.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyB0aRVnSiPDAvWl_QenfuycGczysBu_0ZQ',
-    appId: '1:68148621395:ios:05ca38290d81654d8c56a6',
-    messagingSenderId: '68148621395',
-    projectId: 'garbage-collector-d114a',
-    storageBucket: 'garbage-collector-d114a.appspot.com',
-    iosClientId: '68148621395-0ip7m0o72t2nretm6vclfie71sv9s4h1.apps.googleusercontent.com',
+    apiKey: 'AIzaSyBFu0lX869FhDpf-9UhHuaIK8FyVvkl5zo',
+    appId: '1:620853047278:ios:b6687096819136f10528ff',
+    messagingSenderId: '620853047278',
+    projectId: 'garbage-collector-app-19376',
+    storageBucket: 'garbage-collector-app-19376.appspot.com',
+    iosClientId: '620853047278-o1idpv7293rfusgtcr43i0fio8mn1sih.apps.googleusercontent.com',
     iosBundleId: 'com.example.garbageCollectorApp',
   );
 
   static const FirebaseOptions macos = FirebaseOptions(
-    apiKey: 'AIzaSyB0aRVnSiPDAvWl_QenfuycGczysBu_0ZQ',
-    appId: '1:68148621395:ios:05ca38290d81654d8c56a6',
-    messagingSenderId: '68148621395',
-    projectId: 'garbage-collector-d114a',
-    storageBucket: 'garbage-collector-d114a.appspot.com',
-    iosClientId: '68148621395-0ip7m0o72t2nretm6vclfie71sv9s4h1.apps.googleusercontent.com',
+    apiKey: 'AIzaSyBFu0lX869FhDpf-9UhHuaIK8FyVvkl5zo',
+    appId: '1:620853047278:ios:b6687096819136f10528ff',
+    messagingSenderId: '620853047278',
+    projectId: 'garbage-collector-app-19376',
+    storageBucket: 'garbage-collector-app-19376.appspot.com',
+    iosClientId: '620853047278-o1idpv7293rfusgtcr43i0fio8mn1sih.apps.googleusercontent.com',
     iosBundleId: 'com.example.garbageCollectorApp',
   );
 }

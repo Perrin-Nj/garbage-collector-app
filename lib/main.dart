@@ -1,11 +1,16 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:garbage_collector_app/auth/splash_screen.dart';
+import 'package:garbage_collector_app/splash_screen.dart';
 import 'package:garbage_collector_app/utils/Themes.dart';
 
-void main(List<String> args) {
+import 'firebase_options.dart';
+
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown,
@@ -15,8 +20,11 @@ void main(List<String> args) {
       statusBarColor: Colors.transparent,
     ),
   );
+
   runApp(const MyApp());
 }
+
+final navigatorKey = GlobalKey<NavigatorState>();
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
@@ -27,6 +35,7 @@ class MyApp extends StatelessWidget {
 
     // MaterialColor colorCustom = MaterialColor(0xFF880E4F, color);
     return MaterialApp(
+      navigatorKey: navigatorKey,
       debugShowCheckedModeBanner: false,
       title: 'Garbage Collector app',
       home: const SplashScreen(),
